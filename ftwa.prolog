@@ -2,6 +2,24 @@
 :- discontiguous(spouse/2).
 
 %% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
+
+uid(1, 'Ayşe').
+uid(2, 'Erdem').
+uid(3, 'Erdi').
+uid(4, 'Sibel').
+uid(5, 'Seda').
+uid(6, 'Ali').
+uid(7, 'Ali').
+uid(8, 'Deniz').
+uid(9, 'Melis').
+uid(10, 'Ahmet').
+uid(11, 'Güneş').
+uid(12, 'Seçil').
+uid(13, 'Orhan').
+uid(14, 'Derya').
+uid(15, 'Tolga').
+
+
 uid(1, 'Ayşe').
 uid(2, 'Erdem').
 uid(5, 'Seda').
@@ -10,16 +28,33 @@ uid(7, 'Ali').
 uid(8, 'Deniz'). 
 
 
+
 female(1).
+female(4).
 female(5).
 female(8).
+female(9).
+female(12).
+female(14).
+
+
+
 
 birthdate(date(1925,1,1), 1).
 birthdate(date(1920,1,1), 2).
+birthdate(date(1950,1,1), 3).
+birthdate(date(1949,1,1), 4).
 birthdate(date(1952,1,1), 5).
 birthdate(date(1948,1,1), 6).
 birthdate(date(1960,1,1), 7).
 birthdate(date(1960,1,1), 8).
+birthdate(date(1961,1,1), 9).
+birthdate(date(1960,1,1), 10).
+birthdate(date(1980,1,1), 11).
+birthdate(date(1971,1,1), 12).
+birthdate(date(1978,1,1), 13).
+birthdate(date(1982,1,1), 14).
+birthdate(date(1982,1,1), 15).
 
 
 
@@ -29,14 +64,40 @@ birthdate(date(1960,1,1), 8).
 %% RELATIONS DECLARATION -BEGIN
 
 spouse(1, 2).
+spouse(3, 4).
 spouse(5, 6).
 spouse(7, 8).
+spouse(9. 10).
+
+
+child(3, 1).
+child(3, 2).
 
 child(5, 1).
 child(5, 2).
 
 child(7, 1).
 child(7, 2).
+
+child(9, 1).
+child(9, 2).
+
+
+child(11, 3).
+child(11, 4).
+
+child(12,5).
+child(12,6).
+
+child(13,5).
+child(13,6).
+
+child(14 ,7).
+child(14, 8).
+
+child(15, 9).
+child(15, 10).
+
 
 %% RELATIONS DECLARATION -END
 
