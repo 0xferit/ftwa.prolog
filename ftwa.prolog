@@ -20,14 +20,6 @@ uid(14, 'Derya').
 uid(15, 'Tolga').
 
 
-uid(1, 'Ayşe').
-uid(2, 'Erdem').
-uid(5, 'Seda').
-uid(6, 'Ali').
-uid(7, 'Ali').
-uid(8, 'Deniz'). 
-
-
 
 female(1).
 female(4).
