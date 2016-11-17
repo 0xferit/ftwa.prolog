@@ -4,20 +4,46 @@
 
 male(X) :- not(female(X)).
 
-parent_of(X,Y) :- child_of(Y,X).
+parent(X,Y) :- child(Y,X).
 
 spouse_of(X,Y) :- spouse(Y,X).
 spouse_of(X,Y) :- spouse(X,Y).
 
-sister_of(X,Y) :- siblings(X,Y), female(X).
+sister(X,Y) :- sibling(X,Y), female(X).
 
-brother_of(X,Y) :- siblings(X,Y), not(female(X)).
+brother(X,Y) :- sibling(X,Y), male(X).
 
-siblings(X,Y) :- child_of(X,A), child_of(Y,A), not(X=Y).
+sibling(X,Y) :- child(X,A), child(Y,A), not(X=Y).
 
+anne(X,Y) :- 		parent(X,Y), 	female(X).
+baba(X,Y) :- 		parent(X,Y), 	male(X).
+ogul(X,Y) :- 		child(X,Y), 	male(X).
+kiz(X,Y) :- 		child(X,Y), 	female(X).
+erkek_kardes(X,Y) :- 	sibling(X,Y), 	male(X), 	not(older(X,Y)).
+kiz_kardes(X,Y) :- 	sibling(X,Y), 	female(X), 	not(older(X,Y)).
+abi(X,Y) :- 		sibling(X,Y), 	male(X), 	older(X,Y).
+abla(X,Y) :- 		sibling(X,Y), 	female(X), 	older(X,Y).
 
-damat(X,Y) :- parent_of(X, Z), female(Z), spouse_of(Z,Y).
-gelin(X,Y) :- parent_of(X, Z), not(female(Z)), spouse_of(Z,Y).
+amca(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), male(X).
+hala(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), female(X).
+dayi(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), male(X).
+teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), female(X).
+
+yegen(X,Y) :-		sibling(Z, Y), 	parent(Z, X).
+kuzen(X,Y) :-		parent(Z, X), 	parent(U, Y), 	sibling(Z,U).
+
+%eniste(X,Y) :-
+%yenge(X,Y) :-
+
+kayinpeder(X,Y) :-	damat(Y,X).	
+kayinvalide(X,Y) :-	gelin(Y,X).
+damat(X,Y) :- 		parent(Y, Z), 	female(Z), 	spouse_of(Z,X).
+gelin(X,Y) :- 		parent(Y, Z), 	male(Z), 	spouse_of(Z,X).
+
+bacanak(X,Y) :-		spouse(X,Z), 	spouse(Y,U), 	male(X), male(Y), female(Z), female(U), sibling(Z,U).
+baldiz(X,Y) :-		sibling(X,Z), 	spouse(Z,Y), 	male(Y), female(X), female(Z).
+elti(X,Y) :-		spouse(X,Z), 	spouse(Y,U), 	female(X), female(Y), male(Z), male(U), sibling(Z,U).
+kayinbirader(X,Y) :-	spouse(Z,Y), 	sibling(Z,X), 	male(X).
 
 %% RULES DECLARATION -END
 
@@ -25,24 +51,24 @@ gelin(X,Y) :- parent_of(X, Z), not(female(Z)), spouse_of(Z,Y).
 % add_3_and_double(X,Y) :- Y is (X+3)*2.
 
 %% FAMILY DECLARATION -BEGIN
-uid('Ayşe', 1).
-uid('Erdem', 2).
-uid('Seda', 5).
-uid('Ali', 6).
-uid('Ali', 7).
-uid('Deniz', 8). 
+uid(1, 'Ayşe').
+uid(2, 'Erdem').
+uid(5, 'Seda').
+uid(6, 'Ali').
+uid(7, 'Ali').
+uid(8, 'Deniz'). 
 
 female(1).
 female(5).
 female(8).
 
-birthdate(0, date(1925,1,2)).
-birthdate(1, date(1925,1,1)).
-birthdate(2, date(1920,1,1)).
-birthdate(5, date(1952,1,1)).
-birthdate(6, date(1948,1,1)).
-birthdate(7, date(1960,1,1)).
-birthdate(8, d(1960,1,1)).
+birthdate(date(1925,1,2), 0).
+birthdate(date(1925,1,1), 1).
+birthdate(date(1920,1,1), 2).
+birthdate(date(1952,1,1), 5).
+birthdate(date(1948,1,1), 6).
+birthdate(date(1960,1,1), 7).
+birthdate(date(1960,1,1), 8).
 
 
 
@@ -53,11 +79,11 @@ spouse(1, 2).
 spouse(5, 6).
 spouse(7, 8).
 
-child_of(5, 1).
-child_of(5, 2).
+child(5, 1).
+child(5, 2).
 
-child_of(7, 1).
-child_of(7, 2).
+child(7, 1).
+child(7, 2).
 
 %% RELATIONS DECLARATION -END
 
@@ -76,7 +102,7 @@ list:-
 % age(+Birthday, -Age)
 %
 age(UID, Age) :-
-	birthdate(UID, date(Y2, M2, D2)),
+	birthdate(date(Y2, M2, D2), UID),
 	get_date_time_value(year, Y1),
 	get_date_time_value(month, M1),
 	get_date_time_value(day, D1),
@@ -84,8 +110,8 @@ age(UID, Age) :-
 	( ( M1 < M2 ; M1 == M2, D1 < D2 ) -> Age is A - 1 ; Age = A).
 
 older(UID, UID2) :-
-	birthdate(UID2, date(Y2, M2, D2)),
-	birthdate(UID, date(Y1, M1, D1)),
+	birthdate(date(Y2, M2, D2), UID2),
+	birthdate(date(Y1, M1, D1), UID),
 	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 
 

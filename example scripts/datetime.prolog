@@ -1,0 +1,1 @@
+:- use_module(library(date)).stamp_date_time(get_time(T), D, 0),date_time_value(date, D, Date).
