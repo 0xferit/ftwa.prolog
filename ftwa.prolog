@@ -32,8 +32,8 @@ teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), female(X).
 yegen(X,Y) :-		sibling(Z, Y), 	parent(Z, X).
 kuzen(X,Y) :-		parent(Z, X), 	parent(U, Y), 	sibling(Z,U).
 
-%eniste(X,Y) :-
-%yenge(X,Y) :-
+%eniste(X,Y) :-TODO 
+%yenge(X,Y) :- TODO
 
 kayinpeder(X,Y) :-	damat(Y,X).	
 kayinvalide(X,Y) :-	gelin(Y,X).
@@ -50,7 +50,7 @@ kayinbirader(X,Y) :-	spouse(Z,Y), 	sibling(Z,X), 	male(X).
 
 % add_3_and_double(X,Y) :- Y is (X+3)*2.
 
-%% FAMILY DECLARATION -BEGIN
+%% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
 uid(1, 'Ayşe').
 uid(2, 'Erdem').
 uid(5, 'Seda').
@@ -58,11 +58,11 @@ uid(6, 'Ali').
 uid(7, 'Ali').
 uid(8, 'Deniz'). 
 
+
 female(1).
 female(5).
 female(8).
 
-birthdate(date(1925,1,2), 0).
 birthdate(date(1925,1,1), 1).
 birthdate(date(1920,1,1), 2).
 birthdate(date(1952,1,1), 5).
