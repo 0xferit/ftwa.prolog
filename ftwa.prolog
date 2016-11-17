@@ -59,7 +59,7 @@ spouse(1, 2).
 spouse(3, 4).
 spouse(5, 6).
 spouse(7, 8).
-spouse(9. 10).
+spouse(9, 10).
 
 
 child(3, 1).
@@ -116,10 +116,10 @@ kiz_kardes(X,Y) :- 	sibling(X,Y), 	female(X), 	not(older(X,Y)).
 abi(X,Y) :- 		sibling(X,Y), 	male(X), 	older(X,Y).
 abla(X,Y) :- 		sibling(X,Y), 	female(X), 	older(X,Y).
 
-amca(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), male(X).
-hala(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), female(X).
-dayi(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), male(X).
-teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), female(X).
+amca(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), 	male(X).
+hala(X,Y) :- 		parent(Z, Y), 	male(Z), 	sibling(X, Z), 	female(X).
+dayi(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), 	male(X).
+teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), 	female(X).
 
 yegen(X,Y) :-		sibling(Z, Y), 	parent(Z, X).
 kuzen(X,Y) :-		parent(Z, X), 	parent(U, Y), 	sibling(Z,U).
@@ -132,9 +132,9 @@ kayinvalide(X,Y) :-	gelin(Y,X).
 damat(X,Y) :- 		parent(Y, Z), 	female(Z), 	spouse_of(Z,X).
 gelin(X,Y) :- 		parent(Y, Z), 	male(Z), 	spouse_of(Z,X).
 
-bacanak(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), 	male(X), male(Y), female(Z), female(U), sibling(Z,U).
-baldiz(X,Y) :-		sibling(X,Z), 	spouse_of(Z,Y), 	male(Y), female(X), female(Z).
-elti(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), 	female(X), female(Y), male(Z), male(U), sibling(Z,U).
+bacanak(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), male(X), 	male(Y), 	female(Z), female(U), sibling(Z,U).
+baldiz(X,Y) :-		sibling(X,Z), 	spouse_of(Z,Y), male(Y), 	female(X), 	female(Z).
+elti(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), female(X), 	female(Y), 	male(Z), male(U), sibling(Z,U).
 kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 
