@@ -1,4 +1,45 @@
 :- use_module(library(date)).
+:- discontiguous(spouse/2).
+
+%% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
+uid(1, 'Ayşe').
+uid(2, 'Erdem').
+uid(5, 'Seda').
+uid(6, 'Ali').
+uid(7, 'Ali').
+uid(8, 'Deniz'). 
+
+
+female(1).
+female(5).
+female(8).
+
+birthdate(date(1925,1,1), 1).
+birthdate(date(1920,1,1), 2).
+birthdate(date(1952,1,1), 5).
+birthdate(date(1948,1,1), 6).
+birthdate(date(1960,1,1), 7).
+birthdate(date(1960,1,1), 8).
+
+
+
+%% FAMILY DECLARATION -END
+
+
+%% RELATIONS DECLARATION -BEGIN
+
+spouse(1, 2).
+spouse(5, 6).
+spouse(7, 8).
+
+child(5, 1).
+child(5, 2).
+
+child(7, 1).
+child(7, 2).
+
+%% RELATIONS DECLARATION -END
+
 
 %% RULES DECLARATION -BEGIN
 
@@ -6,12 +47,7 @@ male(X) :- not(female(X)).
 
 parent(X,Y) :- child(Y,X).
 
-spouse_of(X,Y) :- spouse(Y,X).
-spouse_of(X,Y) :- spouse(X,Y).
-
-sister(X,Y) :- sibling(X,Y), female(X).
-
-brother(X,Y) :- sibling(X,Y), male(X).
+spouse(X,Y) :- spouse(Y,X).
 
 sibling(X,Y) :- child(X,A), child(Y,A), not(X=Y).
 
@@ -45,47 +81,17 @@ baldiz(X,Y) :-		sibling(X,Z), 	spouse(Z,Y), 	male(Y), female(X), female(Z).
 elti(X,Y) :-		spouse(X,Z), 	spouse(Y,U), 	female(X), female(Y), male(Z), male(U), sibling(Z,U).
 kayinbirader(X,Y) :-	spouse(Z,Y), 	sibling(Z,X), 	male(X).
 
+%% Set
+rel(X, Y, Z) :- spouse(X,Y); anne(X,Y); baba(X,Y); ogul(X,Y); kiz(X,Y); erkek_kardes(X,Y); kiz_kardes(X,Y); abi(X,Y); abla(X,Y); amca(X,Y); hala(X,Y); dayi(X,Y); teyze(X,Y); yegen(X,Y); kuzen(X,Y);
+	kayinpeder(X,Y); kayinvalide(X,Y); damat(X,Y); gelin(X,Y); bacanak(X,Y); baldiz(X,Y); elti(X,Y); kayinbirader(X,Y).
+
 %% RULES DECLARATION -END
 
 
 % add_3_and_double(X,Y) :- Y is (X+3)*2.
 
-%% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
-uid(1, 'Ayşe').
-uid(2, 'Erdem').
-uid(5, 'Seda').
-uid(6, 'Ali').
-uid(7, 'Ali').
-uid(8, 'Deniz'). 
 
 
-female(1).
-female(5).
-female(8).
-
-birthdate(date(1925,1,1), 1).
-birthdate(date(1920,1,1), 2).
-birthdate(date(1952,1,1), 5).
-birthdate(date(1948,1,1), 6).
-birthdate(date(1960,1,1), 7).
-birthdate(date(1960,1,1), 8).
-
-
-
-%% FAMILY DECLARATION -END
-%% RELATIONS DECLARATION -BEGIN
-
-spouse(1, 2).
-spouse(5, 6).
-spouse(7, 8).
-
-child(5, 1).
-child(5, 2).
-
-child(7, 1).
-child(7, 2).
-
-%% RELATIONS DECLARATION -END
 
 %% FUNCTIONS DECLARATION -BEGIN
 list:-
@@ -93,11 +99,11 @@ list:-
 	write('The UID of '), write(Input),
 	write(' is '), write(Output), write('.').
 
-%! relation(X,Y):-
-%	position(Input, Output),
-%	write('The position of '), write(Input),
-%	write(' is '), write(Output), write('.').
-%
+relation(X,Y, RELATION):-
+	rel(X, Output),
+	write('The position of '), write(Input),
+	write(' is '), write(Output), write('.').
+
 
 % age(+Birthday, -Age)
 %
