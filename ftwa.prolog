@@ -138,6 +138,10 @@ elti(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), female(X), 	female(Y), 	male(Z), m
 kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 
+dede(X,Y) :- 	child(Y,Z), child(Z,X), male(X).
+torun(X,Y) :- 	child(X,Z), child(Z,Y).
+
+
 
 %% RULES DECLARATION -END
 
@@ -178,7 +182,9 @@ relation(X, Y, RELATIO_):- koca(X,Y), functor(koca(X,Y), RELATIO_, _);
 			bacanak(X,Y), functor(bacanak(X,Y), RELATIO_, _);
 			baldiz(X,Y), functor(baldiz(X,Y), RELATIO_, _);
 			elti(X,Y), functor(elti(X,Y), RELATIO_, _);
-			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATIO_, _).
+			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATIO_, _);
+			dede(X,Y), functor(dede(X,Y), RELATIO_, _);
+			torun(X,Y), functor(torun(X,Y), RELATIO_, _).
 
 relation(X,Y):-
 	relation(X, Y, RELATION),
