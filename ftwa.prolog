@@ -36,6 +36,7 @@ female(1).
 female(5).
 female(8).
 
+birthdate(0, date(1925,1,2)).
 birthdate(1, date(1925,1,1)).
 birthdate(2, date(1920,1,1)).
 birthdate(5, date(1952,1,1)).
@@ -82,6 +83,11 @@ age(UID, Age) :-
 	A is Y1 - Y2,
 	( ( M1 < M2 ; M1 == M2, D1 < D2 ) -> Age is A - 1 ; Age = A).
 
+older(UID, UID2) :-
+	birthdate(UID2, date(Y2, M2, D2)),
+	birthdate(UID, date(Y1, M1, D1)),
+	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+
 
 %% UTILITY FUNCTIONS DECLARATION -BEGIN
 get_date_now(Value) :-
@@ -93,8 +99,6 @@ get_date_time_value(Key, Value) :-
  get_time(Stamp),
  stamp_date_time(Stamp, DateTime, local),
  date_time_value(Key, DateTime, Value).
-
-%get_time_diff
 
 %% UTILITY FUNCTIONS DECLARATION -END
 %% FUNCTIONS DECLARATION -END
