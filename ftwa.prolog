@@ -3,22 +3,38 @@
 
 %% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
 
-uid(1, 'Ayşe').
-uid(2, 'Erdem').
-uid(3, 'Erdi').
-uid(4, 'Sibel').
-uid(5, 'Seda').
-uid(6, 'Ali').
-uid(7, 'Ali').
-uid(8, 'Deniz').
-uid(9, 'Melis').
-uid(10, 'Ahmet').
-uid(11, 'Güneş').
-uid(12, 'Seçil').
-uid(13, 'Orhan').
-uid(14, 'Derya').
-uid(15, 'Tolga').
 
+uid(1).
+uid(2).
+uid(3).
+uid(4).
+uid(5).
+uid(6).
+uid(7).
+uid(8).
+uid(9).
+uid(10).
+uid(11).
+uid(12).
+uid(13).
+uid(14).
+uid(15).
+
+name('Ayşe', 1).
+name('Erdem', 2).
+name('Erdi', 3).
+name('Sibel', 4).
+name('Seda', 5).
+name('Ali', 6).
+name('Ali', 7).
+name('Deniz', 8).
+name('Melis', 9).
+name('Ahmet', 10).
+name('Güneş', 11).
+name('Seçil', 12).
+name('Orhan', 13).
+name('Derya', 14).
+name('Tolga', 15).
 
 
 female(1).
