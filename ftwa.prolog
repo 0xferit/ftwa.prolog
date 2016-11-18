@@ -169,8 +169,11 @@ teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), 	female(X).
 yegen(X,Y) :-		sibling(Z, Y), 	parent(Z, X).
 kuzen(X,Y) :-		parent(Z, X), 	parent(U, Y), 	sibling(Z,U).
 
-%eniste(X,Y) :-TODO 
-%yenge(X,Y) :- TODO
+eniste(X,Y) :-		sibling(Z, Y), female(Z), spouse_of(X,Z) : hala(Z,Y), spouse_of(X,Z) : teyze(Z,Y), spouse_of(X,Z).
+
+yenge(X,Y) :-		sibling(Z, Y), male(Z), spouse_of(X,Z) : amca(Z,Y), spouse_of(X,Z) : dayi(Z,Y), spouse_of(X,Z).
+		
+
 
 kayinpeder(X,Y) :-	damat(Y,X).	
 kayinvalide(X,Y) :-	gelin(Y,X).
@@ -192,6 +195,8 @@ torun(X,Y) :- 	(child(X,Z), child(Z,Y));dede(Y,X);anneanne(Y,X);babaanne(Y,X).
 
 grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
 grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
+
+
 
 
 % deathdate(X,Y):- X = not(is_future(D)). % Trying to avoid setting deathdates to future, not successful
@@ -268,7 +273,9 @@ relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
 			dede(X,Y), functor(dede(X,Y), RELATION, _);
 			anneanne(X,Y), functor(anneanne(X,Y), RELATION, _);
 			babaanne(X,Y), functor(babaanne(X,Y), RELATION, _);
-			torun(X,Y), functor(torun(X,Y), RELATION, _).
+			torun(X,Y), functor(torun(X,Y), RELATION, _);
+			yenge(X,Y), functor(yenge(X,Y), RELATION, _);
+			eniste(X,Y), functor(eniste(X,Y), RELATION, _).
 
 relation(X,Y):-
 	relation(X, Y, RELATION),
