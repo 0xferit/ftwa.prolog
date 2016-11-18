@@ -187,9 +187,8 @@ babaanne(X,Y):- child(Y, Z), child(Z, X), male(Z), female(X).
 
 
 list:-
-	uid(Input),
-	write(Input).
-
+	findall(Input,uid(Input),Z),
+	write(Z).
 relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
  			kari(X,Y), functor(kari(X,Y), RELATION, _);
  			anne(X,Y), functor(anne(X,Y), RELATION, _);
