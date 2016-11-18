@@ -1,5 +1,6 @@
 :- use_module(library(date)).
 :- discontiguous(spouse/2).
+:- dynamic uid/1.
 
 %% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
 
