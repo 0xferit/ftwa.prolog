@@ -85,7 +85,7 @@ birthdate(date(1982,1,1), 15).
 birthdate(date(2002,1,1), 16).
 birthdate(date(1992,1,1), 17).
 
-deathdate(date(1990,1,1), 16).
+%deathdate(date(1990,1,1), 16).
 %deathdate(date(2990,1,1), 17).
 
 
@@ -203,10 +203,10 @@ grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 % deathdate(X,Y):- X = not(is_future(D)). % Trying to avoid setting deathdates to future, not successful
 
-birthdate(X,Y):- child(Y,Z), birthdate(T,Z), later(X,T).
-birthdate(X,Y):- child(Y,Z), deathdate(T,Z), not(later(X,T)).
-deathdate(X,Y):- child(Y,Z), birthdate(T,Z), later(X,T).
-birthdate(X,Y):- deathdate(T,Y), later(T,X).
+%birthdate(X,Y):- child(Y,Z), birthdate(T,Z), later(U,T), birthdate(U,Y).
+%birthdate(X,Y):- child(Y,Z), deathdate(T,Z), later(T,X).
+%deathdate(X,Y):- child(Y,Z), birthdate(T,Z), later(X,T).
+%birthdate(X,Y):- deathdate(T,Y), later(T,X).
 
 
 
@@ -302,7 +302,7 @@ age(UID, Age) :-
 older(UID, UID2) :-
 	birthdate(date(Y2, M2, D2), UID2),
 	birthdate(date(Y1, M1, D1), UID),
-	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 
 dead9(UID) % checks whether there is a deathdate
 	:- deathdate(_,UID).
@@ -310,7 +310,7 @@ dead9(UID) % checks whether there is a deathdate
 dead(UID):- % controls date
 	get_date_now(date(Y1, M1, D1)),
 	deathdate(date(Y2, M2, D2), UID),
-	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 	
 
 
@@ -328,12 +328,12 @@ get_date_time_value(Key, Value) :-
 is_future(DATE):- % Tests DATE > TODAY
 	get_date_now(date(Y2, M2, D2)),
 	date(Y1, M1, D1) = DATE,
-	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 
 later(Date1, Date2):- % Tests Date1 > Date2
 	date(Y1, M1, D1) = Date1,
 	date(Y2, M2, D2) = Date2,
-	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 	
 
 %% UTILITY FUNCTIONS DECLARATION -END
