@@ -126,8 +126,9 @@ child(15, 10).
 male(X) :- not(female(X)).
 
 parent(X,Y) :- child(Y,X).
-grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
-grandchild(X,Y):- grandparent(Y,X).
+
+
+
 
 spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), not(sibling(X,Y)), not(amca(X,Y)), not(hala(X,Y)), not(dayi(X,Y)), not(teyze(X,Y)).
 
@@ -168,11 +169,14 @@ kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 
 dede(X,Y) :- 	child(Y,Z), child(Z,X), male(X).
-torun(X,Y) :- 	child(X,Z), child(Z,Y).
 anneanne(X,Y):- child(Y, Z), child(Z, X), female(Z), female(X).
 babaanne(X,Y):- child(Y, Z), child(Z, X), male(Z), female(X).
 
+torun(X,Y) :- 	(child(X,Z), child(Z,Y));dede(Y,X);anneanne(Y,X);babaanne(Y,X).
 
+
+grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
+grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 
 %% RULES DECLARATION -END
@@ -185,10 +189,30 @@ babaanne(X,Y):- child(Y, Z), child(Z, X), male(Z), female(X).
 
 %% FUNCTIONS DECLARATION -BEGIN
 
+commands:-
+	write('list/0 - Lists UIDs\n'), write('relations/0 - Lists all primitive relations\n'), write('all_relations/0 - Lists all relations including complex ones\n'),
+	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n') .
 
 list:-
-	findall(Input,uid(Input),Z),
+	findall((X),(uid(X)),Z),
 	write(Z).
+
+relations:-
+	findall((X,RELATION,Y), primitive_relation(X, Y, RELATION), Z),
+	write(Z).
+
+all_relations:-
+	findall((X,RELATION,Y), relation(X, Y, RELATION), Z),
+	write(Z).
+
+all_relations_of(X):-
+	findall((X,RELATION,Y), relation(X, Y, RELATION), Z),
+	write(Z).
+
+
+primitive_relation(X, Y, RELATION):- spouse_of(X,Y), functor(spouse_of(X,Y), RELATION, _);
+					child(X,Y), functor(child(X,Y), RELATION, _).
+
 relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
  			kari(X,Y), functor(kari(X,Y), RELATION, _);
  			anne(X,Y), functor(anne(X,Y), RELATION, _);
@@ -214,6 +238,8 @@ relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
 			elti(X,Y), functor(elti(X,Y), RELATION, _);
 			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATION, _);
 			dede(X,Y), functor(dede(X,Y), RELATION, _);
+			anneanne(X,Y), functor(anneanne(X,Y), RELATION, _);
+			babaanne(X,Y), functor(babaanne(X,Y), RELATION, _);
 			torun(X,Y), functor(torun(X,Y), RELATION, _).
 
 relation(X,Y):-
