@@ -129,7 +129,7 @@ parent(X,Y) :- child(Y,X).
 grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
 grandchild(X,Y):- grandparent(Y,X).
 
-spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y), parent(X,Y), grandchild(X,Y), grandparent(X,Y), sibling(X,Y), amca(X,Y), hala(X,Y), dayı(X,Y), yenge(X,Y)).
+spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y), parent(X,Y), grandchild(X,Y), grandparent(X,Y), sibling(X,Y), amca(X,Y), hala(X,Y), dayı(X,Y), teyze(X,Y)).
 
 
 sibling(X,Y) :- child(X,A), child(Y,A), not(X=Y).
