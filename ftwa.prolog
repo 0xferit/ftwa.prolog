@@ -302,7 +302,7 @@ age(UID, Age) :-
 older(UID, UID2) :-
 	birthdate(date(Y2, M2, D2), UID2),
 	birthdate(date(Y1, M1, D1), UID),
-	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	(Y1 < Y2; Y1==Y2, M1 < M2; Y1==Y2, M1==M2, D1 < D2).
 
 dead9(UID) % checks whether there is a deathdate
 	:- deathdate(_,UID).
