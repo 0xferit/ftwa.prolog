@@ -215,7 +215,7 @@ birthdate(X,Y):- deathdate(T,Y), later(T,X).
 
 commands:-
 	write('list/0 - Lists UIDs\n'), write('relations/0 - Lists all primitive relations\n'), write('all_relations/0 - Lists all relations including complex ones\n'),
-	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n'), write('childmarriages/0 - Displays childmarriages.\n') .
+	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n'), write('childmarriages/0 - Displays childmarriages.\n'),  write('dead/1 - Tests if the person is dead.\n').
 
 childmarriages:-
 	findall((X, Y),(spouse(X,Y), (age(X, T), T<18 ; age(Y, U), U< 18)),Z),
@@ -241,34 +241,34 @@ all_relations_of(X):-
 primitive_relation(X, Y, RELATION):- spouse_of(X,Y), functor(spouse_of(X,Y), RELATION, _);
 					child(X,Y), functor(child(X,Y), RELATION, _).
 
-relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
- 			kari(X,Y), functor(kari(X,Y), RELATION, _);
- 			anne(X,Y), functor(anne(X,Y), RELATION, _);
-  			baba(X,Y), functor(baba(X,Y), RELATION, _);
- 			ogul(X,Y), functor(ogul(X,Y), RELATION, _);
- 			kiz(X,Y), functor(kiz(X,Y), RELATION, _);
- 			erkek_kardes(X,Y), functor(erkek_kardes(X,Y), RELATION, _);
-			kiz_kardes(X,Y), functor(kiz_kardes(X,Y), RELATION, _);
-			abi(X,Y), functor(abi(X,Y), RELATION, _);
-			abla(X,Y), functor(abla(X,Y), RELATION, _);
-			amca(X,Y), functor(amca(X,Y), RELATION, _);
-			hala(X,Y), functor(hala(X,Y), RELATION, _);
-			dayi(X,Y), functor(dayi(X,Y), RELATION, _);
-			teyze(X,Y), functor(teyze(X,Y), RELATION, _);
-			yegen(X,Y), functor(yegen(X,Y), RELATION, _);
-			kuzen(X,Y), functor(kuzen(X,Y), RELATION, _);
-			kayinpeder(X,Y), functor(kayinpeder(X,Y), RELATION, _);
-			kayinvalide(X,Y), functor(kayinvalide(X,Y), RELATION, _);
-			damat(X,Y), functor(damat(X,Y), RELATION, _);
-			gelin(X,Y), functor(gelin(X,Y), RELATION, _);
-			bacanak(X,Y), functor(bacanak(X,Y), RELATION, _);
-			baldiz(X,Y), functor(baldiz(X,Y), RELATION, _);
-			elti(X,Y), functor(elti(X,Y), RELATION, _);
-			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATION, _);
-			dede(X,Y), functor(dede(X,Y), RELATION, _);
-			anneanne(X,Y), functor(anneanne(X,Y), RELATION, _);
-			babaanne(X,Y), functor(babaanne(X,Y), RELATION, _);
-			torun(X,Y), functor(torun(X,Y), RELATION, _).
+relation(X, Y, RELATION):- koca(X,Y), 		functor(koca(X,Y), RELATION, _);
+ 			kari(X,Y), 		functor(kari(X,Y), RELATION, _);
+ 			anne(X,Y), 		functor(anne(X,Y), RELATION, _);
+  			baba(X,Y), 		functor(baba(X,Y), RELATION, _);
+ 			ogul(X,Y), 		functor(ogul(X,Y), RELATION, _);
+ 			kiz(X,Y), 		functor(kiz(X,Y), RELATION, _);
+ 			erkek_kardes(X,Y), 	functor(erkek_kardes(X,Y), RELATION, _);
+			kiz_kardes(X,Y), 	functor(kiz_kardes(X,Y), RELATION, _);
+			abi(X,Y), 		functor(abi(X,Y), RELATION, _);
+			abla(X,Y), 		functor(abla(X,Y), RELATION, _);
+			amca(X,Y), 		functor(amca(X,Y), RELATION, _);
+			hala(X,Y), 		functor(hala(X,Y), RELATION, _);
+			dayi(X,Y), 		functor(dayi(X,Y), RELATION, _);
+			teyze(X,Y), 		functor(teyze(X,Y), RELATION, _);
+			yegen(X,Y),		functor(yegen(X,Y), RELATION, _);
+			kuzen(X,Y), 		functor(kuzen(X,Y), RELATION, _);
+			kayinpeder(X,Y), 	functor(kayinpeder(X,Y), RELATION, _);
+			kayinvalide(X,Y), 	functor(kayinvalide(X,Y), RELATION, _);
+			damat(X,Y), 		functor(damat(X,Y), RELATION, _);
+			gelin(X,Y), 		functor(gelin(X,Y), RELATION, _);
+			bacanak(X,Y), 		functor(bacanak(X,Y), RELATION, _);
+			baldiz(X,Y), 		functor(baldiz(X,Y), RELATION, _);
+			elti(X,Y), 		functor(elti(X,Y), RELATION, _);
+			kayinbirader(X,Y),	functor(kayinbirader(X,Y), RELATION, _);
+			dede(X,Y), 		functor(dede(X,Y), RELATION, _);
+			anneanne(X,Y),		functor(anneanne(X,Y), RELATION, _);
+			babaanne(X,Y),		functor(babaanne(X,Y), RELATION, _);
+			torun(X,Y),		functor(torun(X,Y), RELATION, _).
 
 relation(X,Y):-
 	relation(X, Y, RELATION),
