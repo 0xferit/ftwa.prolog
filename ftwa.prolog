@@ -169,9 +169,9 @@ teyze(X,Y) :- 		parent(Z, Y), 	female(Z), 	sibling(X, Z), 	female(X).
 yegen(X,Y) :-		sibling(Z, Y), 	parent(Z, X).
 kuzen(X,Y) :-		parent(Z, X), 	parent(U, Y), 	sibling(Z,U).
 
-eniste(X,Y) :-		sibling(Z, Y), female(Z), spouse_of(X,Z) : hala(Z,Y), spouse_of(X,Z) : teyze(Z,Y), spouse_of(X,Z).
+eniste(X,Y) :-		sibling(Z, Y), female(Z), spouse_of(X,Z) ; hala(Z,Y), spouse_of(X,Z) ; teyze(Z,Y), spouse_of(X,Z).
 
-yenge(X,Y) :-		sibling(Z, Y), male(Z), spouse_of(X,Z) : amca(Z,Y), spouse_of(X,Z) : dayi(Z,Y), spouse_of(X,Z).
+yenge(X,Y) :-		sibling(Z, Y), male(Z), spouse_of(X,Z) ; amca(Z,Y), spouse_of(X,Z) ; dayi(Z,Y), spouse_of(X,Z).
 		
 
 
@@ -275,8 +275,8 @@ relation(X, Y, RELATION):- koca(X,Y), 		functor(koca(X,Y), RELATION, _);
 			anneanne(X,Y),		functor(anneanne(X,Y), RELATION, _);
 			babaanne(X,Y),		functor(babaanne(X,Y), RELATION, _);
 			torun(X,Y),		functor(torun(X,Y), RELATION, _);
-			yenge(X,Y), functor(yenge(X,Y), RELATION, _);
-			eniste(X,Y), functor(eniste(X,Y), RELATION, _).
+			yenge(X,Y), 		functor(yenge(X,Y), RELATION, _);
+			eniste(X,Y), 		functor(eniste(X,Y), RELATION, _).
 
 
 relation(X,Y):-
