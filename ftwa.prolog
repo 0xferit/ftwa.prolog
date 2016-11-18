@@ -118,8 +118,10 @@ child(15, 10).
 male(X) :- not(female(X)).
 
 parent(X,Y) :- child(Y,X).
+grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
+grandchild(X,Y):- grandparent(Y,X).
 
-spouse_of(X,Y) :- spouse(Y,X); spouse(X,Y).
+spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y), parent(X,Y), grandchild(X,Y), grandparent(X,Y), sibling(X,Y), amca(X,Y), hala(X,Y), dayı(X,Y), yenge(X,Y)).
 
 
 sibling(X,Y) :- child(X,A), child(Y,A), not(X=Y).
@@ -159,6 +161,9 @@ kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 dede(X,Y) :- 	child(Y,Z), child(Z,X), male(X).
 torun(X,Y) :- 	child(X,Z), child(Z,Y).
+anneanne(X,Y):- child(Y, Z), child(Z, X), female(Z), female(X).
+babaanne(X,Y):- child(Y, Z), child(Z, X), male(Z), female(X).
+
 
 
 
@@ -209,6 +214,8 @@ relation(X,Y):-
 	relation(X, Y, RELATION),
 	write(X), write(' is '),
 	write(RELATION), write(' of '), write(Y).
+
+
 
 
 % age(+Birthday, -Age)
