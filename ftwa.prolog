@@ -1,6 +1,8 @@
 :- use_module(library(date)).
 :- discontiguous(spouse/2).
 :- discontiguous(deathdate/2).
+:- discontiguous(warning/0).
+:- discontiguous(birthdate/2).
 :- dynamic uid/1.
 :- dynamic name/2.
 :- dynamic surname/2.
@@ -11,7 +13,9 @@
 :- dynamic child/2.
 :- dynamic parent/2.
 
-%% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
+
+
+%% FAMILY DECLARATION -BEGIN 
 
 
 uid(1).
@@ -61,7 +65,7 @@ female(12).
 female(14).
 
 
-
+female(16).
 
 birthdate(date(1925,1,1), 1).
 birthdate(date(1920,1,1), 2).
@@ -79,6 +83,9 @@ birthdate(date(1978,1,1), 13).
 birthdate(date(1982,1,1), 14).
 birthdate(date(1982,1,1), 15).
 
+birthdate(date(2002,1,1), 16).
+birthdate(date(1992,1,1), 17).
+
 deathdate(date(1990,1,1), 16).
 %deathdate(date(2990,1,1), 17).
 
@@ -94,6 +101,8 @@ spouse(5, 6).
 spouse(7, 8).
 spouse(9, 10).
 
+
+spouse(16, 17).
 
 child(3, 1).
 child(3, 2).
@@ -187,6 +196,12 @@ grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 % deathdate(X,Y):- X = not(is_future(D)). % Trying to avoid setting deathdates to future, not successful
 
+birthdate(X,Y):- child(Y,Z), birthdate(T,Z), later(X,T).
+birthdate(X,Y):- child(Y,Z), deathdate(T,Z), not(later(X,T)).
+deathdate(X,Y):- child(Y,Z), birthdate(T,Z), later(X,T).
+birthdate(X,Y):- deathdate(T,Y), later(T,X).
+
+
 
 %% RULES DECLARATION -END
 
@@ -200,7 +215,11 @@ grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 commands:-
 	write('list/0 - Lists UIDs\n'), write('relations/0 - Lists all primitive relations\n'), write('all_relations/0 - Lists all relations including complex ones\n'),
-	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n') .
+	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n'), write('childmarriages/0 - Displays childmarriages.\n') .
+
+childmarriages:-
+	findall((X, Y),(spouse(X,Y), (age(X, T), T<18 ; age(Y, U), U< 18)),Z),
+	write('Warning: Following marriages are childmarriages!\n'), write(Z).
 
 list:-
 	findall((X),(uid(X)),Z),
@@ -295,12 +314,20 @@ get_date_time_value(Key, Value) :-
  	stamp_date_time(Stamp, DateTime, local),
 	date_time_value(Key, DateTime, Value).
 
-is_future(DATE):-
+is_future(DATE):- % Tests DATE > TODAY
 	get_date_now(date(Y2, M2, D2)),
 	date(Y1, M1, D1) = DATE,
 	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+
+later(Date1, Date2):- % Tests Date1 > Date2
+	date(Y1, M1, D1) = Date1,
+	date(Y2, M2, D2) = Date2,
+	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	
 
 %% UTILITY FUNCTIONS DECLARATION -END
 
 
 %% FUNCTIONS DECLARATION -END
+
+warning.
