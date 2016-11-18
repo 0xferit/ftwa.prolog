@@ -177,32 +177,32 @@ list:-
 	write('The UID of '), write(Input),
 	write(' is '), write(Output), write('.').
 
-relation(X, Y, RELATIO_):- koca(X,Y), functor(koca(X,Y), RELATIO_, _);
- 			kari(X,Y), functor(kari(X,Y), RELATIO_, _);
- 			anne(X,Y), functor(anne(X,Y), RELATIO_, _);
-  			baba(X,Y), functor(baba(X,Y), RELATIO_, _);
- 			ogul(X,Y), functor(ogul(X,Y), RELATIO_, _);
- 			kiz(X,Y), functor(kiz(X,Y), RELATIO_, _);
- 			erkek_kardes(X,Y), functor(erkek_kardes(X,Y), RELATIO_, _);
-			kiz_kardes(X,Y), functor(kiz_kardes(X,Y), RELATIO_, _);
-			abi(X,Y), functor(abi(X,Y), RELATIO_, _);
-			abla(X,Y), functor(abla(X,Y), RELATIO_, _);
-			amca(X,Y), functor(amca(X,Y), RELATIO_, _);
-			hala(X,Y), functor(hala(X,Y), RELATIO_, _);
-			dayi(X,Y), functor(dayi(X,Y), RELATIO_, _);
-			teyze(X,Y), functor(teyze(X,Y), RELATIO_, _);
-			yegen(X,Y), functor(yegen(X,Y), RELATIO_, _);
-			kuzen(X,Y), functor(kuzen(X,Y), RELATIO_, _);
-			kayinpeder(X,Y), functor(kayinpeder(X,Y), RELATIO_, _);
-			kayinvalide(X,Y), functor(kayinvalide(X,Y), RELATIO_, _);
-			damat(X,Y), functor(damat(X,Y), RELATIO_, _);
-			gelin(X,Y), functor(gelin(X,Y), RELATIO_, _);
-			bacanak(X,Y), functor(bacanak(X,Y), RELATIO_, _);
-			baldiz(X,Y), functor(baldiz(X,Y), RELATIO_, _);
-			elti(X,Y), functor(elti(X,Y), RELATIO_, _);
-			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATIO_, _);
-			dede(X,Y), functor(dede(X,Y), RELATIO_, _);
-			torun(X,Y), functor(torun(X,Y), RELATIO_, _).
+relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
+ 			kari(X,Y), functor(kari(X,Y), RELATION, _);
+ 			anne(X,Y), functor(anne(X,Y), RELATION, _);
+  			baba(X,Y), functor(baba(X,Y), RELATION, _);
+ 			ogul(X,Y), functor(ogul(X,Y), RELATION, _);
+ 			kiz(X,Y), functor(kiz(X,Y), RELATION, _);
+ 			erkek_kardes(X,Y), functor(erkek_kardes(X,Y), RELATION, _);
+			kiz_kardes(X,Y), functor(kiz_kardes(X,Y), RELATION, _);
+			abi(X,Y), functor(abi(X,Y), RELATION, _);
+			abla(X,Y), functor(abla(X,Y), RELATION, _);
+			amca(X,Y), functor(amca(X,Y), RELATION, _);
+			hala(X,Y), functor(hala(X,Y), RELATION, _);
+			dayi(X,Y), functor(dayi(X,Y), RELATION, _);
+			teyze(X,Y), functor(teyze(X,Y), RELATION, _);
+			yegen(X,Y), functor(yegen(X,Y), RELATION, _);
+			kuzen(X,Y), functor(kuzen(X,Y), RELATION, _);
+			kayinpeder(X,Y), functor(kayinpeder(X,Y), RELATION, _);
+			kayinvalide(X,Y), functor(kayinvalide(X,Y), RELATION, _);
+			damat(X,Y), functor(damat(X,Y), RELATION, _);
+			gelin(X,Y), functor(gelin(X,Y), RELATION, _);
+			bacanak(X,Y), functor(bacanak(X,Y), RELATION, _);
+			baldiz(X,Y), functor(baldiz(X,Y), RELATION, _);
+			elti(X,Y), functor(elti(X,Y), RELATION, _);
+			kayinbirader(X,Y), functor(kayinbirader(X,Y), RELATION, _);
+			dede(X,Y), functor(dede(X,Y), RELATION, _);
+			torun(X,Y), functor(torun(X,Y), RELATION, _).
 
 relation(X,Y):-
 	relation(X, Y, RELATION),
