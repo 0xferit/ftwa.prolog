@@ -14,7 +14,6 @@
 :- dynamic parent/2.
 
 
-
 %% FAMILY DECLARATION -BEGIN 
 
 
@@ -101,6 +100,8 @@ spouse(5, 6).
 spouse(7, 8).
 spouse(9, 10).
 
+spouse(11,7).
+
 
 spouse(16, 17).
 
@@ -145,7 +146,8 @@ parent(X,Y) :- child(Y,X).
 
 
 
-spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), not(sibling(X,Y)), not(amca(X,Y)), not(hala(X,Y)), not(dayi(X,Y)), not(teyze(X,Y)).
+spouse_of(X,Y) :- (spouse(Y,X); spouse(X,Y)), not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), not(sibling(X,Y)),
+		not(amca(X,Y)), not(hala(X,Y)), not(dayi(X,Y)), not(teyze(X,Y)), not(amca(Y,X)), not(hala(Y,X)), not(dayi(Y,X)), not(teyze(Y,X)).
 
 
 sibling(X,Y) :- child(X,A), child(Y,A), not(X=Y).
@@ -339,4 +341,4 @@ later(Date1, Date2):- % Tests Date1 > Date2
 
 %% FUNCTIONS DECLARATION -END
 
-warning.
+
