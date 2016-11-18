@@ -20,6 +20,8 @@ uid(13).
 uid(14).
 uid(15).
 
+
+
 name('Ayşe', 1).
 name('Erdem', 2).
 name('Erdi', 3).
