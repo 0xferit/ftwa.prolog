@@ -1,6 +1,14 @@
 :- use_module(library(date)).
 :- discontiguous(spouse/2).
 :- dynamic uid/1.
+:- dynamic name/2.
+:- dynamic surname/2.
+:- dynamic gender/2.
+:- dynamic birthdate/2.
+:- dynamic deathdate/2.
+:- dynamic spouse/2.
+:- dynamic child/2.
+:- dynamic parent/2.
 
 %% FAMILY DECLARATION -BEGIN TODO Ailenin geri kalani yazilacak
 
@@ -179,9 +187,8 @@ babaanne(X,Y):- child(Y, Z), child(Z, X), male(Z), female(X).
 
 
 list:-
-	uid(Input, Output),
-	write('The UID of '), write(Input),
-	write(' is '), write(Output), write('.').
+	uid(Input),
+	write(Input).
 
 relation(X, Y, RELATION):- koca(X,Y), functor(koca(X,Y), RELATION, _);
  			kari(X,Y), functor(kari(X,Y), RELATION, _);
