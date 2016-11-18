@@ -1,5 +1,6 @@
 :- use_module(library(date)).
 :- discontiguous(spouse/2).
+:- discontiguous(deathdate/2).
 :- dynamic uid/1.
 :- dynamic name/2.
 :- dynamic surname/2.
@@ -28,6 +29,9 @@ uid(12).
 uid(13).
 uid(14).
 uid(15).
+
+uid(16).
+uid(17).
 
 
 
@@ -75,6 +79,8 @@ birthdate(date(1978,1,1), 13).
 birthdate(date(1982,1,1), 14).
 birthdate(date(1982,1,1), 15).
 
+deathdate(date(1990,1,1), 16).
+%deathdate(date(2990,1,1), 17).
 
 
 %% FAMILY DECLARATION -END
@@ -179,6 +185,9 @@ grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
 grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 
+% deathdate(X,Y):- X = not(is_future(D)). % Trying to avoid setting deathdates to future, not successful
+
+
 %% RULES DECLARATION -END
 
 
@@ -265,6 +274,14 @@ older(UID, UID2) :-
 	birthdate(date(Y1, M1, D1), UID),
 	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 
+dead9(UID) % checks whether there is a deathdate
+	:- deathdate(_,UID).
+
+dead(UID):- % controls date
+	get_date_now(date(Y1, M1, D1)),
+	deathdate(date(Y2, M2, D2), UID),
+	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+	
 
 
 %% UTILITY FUNCTIONS DECLARATION -BEGIN
@@ -277,6 +294,11 @@ get_date_time_value(Key, Value) :-
 	get_time(Stamp),
  	stamp_date_time(Stamp, DateTime, local),
 	date_time_value(Key, DateTime, Value).
+
+is_future(DATE):-
+	get_date_now(date(Y2, M2, D2)),
+	date(Y1, M1, D1) = DATE,
+	(Y1 > Y2; Y1=Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 
 %% UTILITY FUNCTIONS DECLARATION -END
 
