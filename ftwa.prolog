@@ -185,6 +185,7 @@ gelin(X,Y) :- 		parent(Y, Z), 	male(Z), 	spouse_of(Z,X).
 bacanak(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), male(X), 	male(Y), 	female(Z), female(U), sibling(Z,U).
 baldiz(X,Y) :-		sibling(X,Z), 	spouse_of(Z,Y), male(Y), 	female(X), 	female(Z).
 elti(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), female(X), 	female(Y), 	male(Z), male(U), sibling(Z,U).
+gorumce(X,Y) :-		sibling(X,Z), female(X), female(Y), male(Z), spouse_of(Y,Z).
 kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 
@@ -278,7 +279,8 @@ relation(X, Y, RELATION):- koca(X,Y), 		functor(koca(X,Y), RELATION, _);
 			babaanne(X,Y),		functor(babaanne(X,Y), RELATION, _);
 			torun(X,Y),		functor(torun(X,Y), RELATION, _);
 			yenge(X,Y), 		functor(yenge(X,Y), RELATION, _);
-			eniste(X,Y), 		functor(eniste(X,Y), RELATION, _).
+			eniste(X,Y), 		functor(eniste(X,Y), RELATION, _);
+			gorumce(X,Y),		functor(gorumce(X,Y), RELATION, _).
 
 
 relation(X,Y):-
