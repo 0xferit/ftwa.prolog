@@ -177,8 +177,8 @@ yenge(X,Y) :-		sibling(Z, Y), male(Z), spouse_of(X,Z) ; amca(Z,Y), spouse_of(X,Z
 		
 
 
-kayinpeder(X,Y) :-	damat(Y,X).	
-kayinvalide(X,Y) :-	gelin(Y,X).
+kayinpeder(X,Y) :-	damat(Y,X), male(X) ; gelin(Y,X), male(X).	
+kayinvalide(X,Y) :-	damat(Y,X), female(X) ; gelin(Y,X), female(X).
 damat(X,Y) :- 		parent(Y, Z), 	female(Z), 	spouse_of(Z,X).
 gelin(X,Y) :- 		parent(Y, Z), 	male(Z), 	spouse_of(Z,X).
 
@@ -311,6 +311,9 @@ dead(UID):- % controls date
 	get_date_now(date(Y1, M1, D1)),
 	deathdate(date(Y2, M2, D2), UID),
 	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+
+%%level(0,1). CALCULATE LEVEL
+%%level(Uid,X) :- father(A,Uid), C is X+1 level(C,D), %%X is C
 	
 
 
