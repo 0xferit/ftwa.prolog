@@ -37,6 +37,10 @@ uid(16).
 uid(17).
 
 
+%% c
+uid(18).
+%% c
+
 
 name('Ayşe', 1).
 name('Erdem', 2).
@@ -55,6 +59,12 @@ name('Derya', 14).
 name('Tolga', 15).
 
 
+%% c 
+
+name('Dembaba', 18).
+
+%% c
+
 female(1).
 female(4).
 female(5).
@@ -65,6 +75,8 @@ female(14).
 
 
 female(16).
+
+
 
 birthdate(date(1925,1,1), 1).
 birthdate(date(1920,1,1), 2).
@@ -85,6 +97,9 @@ birthdate(date(1982,1,1), 15).
 birthdate(date(2002,1,1), 16).
 birthdate(date(1992,1,1), 17).
 
+%% c
+birthdate(date(2002,1,1), 18).
+%% c
 %deathdate(date(1990,1,1), 16).
 %deathdate(date(2990,1,1), 17).
 
@@ -93,6 +108,8 @@ birthdate(date(1992,1,1), 17).
 
 
 %% RELATIONS DECLARATION -BEGIN
+
+
 
 spouse(1, 2).
 spouse(3, 4).
@@ -221,6 +238,7 @@ grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 %% FUNCTIONS DECLARATION -BEGIN
 
+
 commands:-
 	write('list/0 - Lists UIDs\n'), write('relations/0 - Lists all primitive relations\n'), write('all_relations/0 - Lists all relations including complex ones\n'),
 	write('relation/2 - Displays relation between two\n'), write('age/1 - Displays age of the person with given UID\n'), write('older/2 - Returns true if first person is older than second person. Takes persons as UIDs.\n'), write('childmarriages/0 - Displays childmarriages.\n'),  write('dead/1 - Tests if the person is dead.\n').
@@ -345,7 +363,27 @@ later(Date1, Date2):- % Tests Date1 > Date2
 	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 	
 
-%% UTILITY FUNCTIONS DECLARATION -END
+%% UTILITY FUNCTIONS DECLARATION -END (spouse(Y,X); spouse(X,Y)), 
+
+add_as_spouse(X,Y):- 
+
+(child(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+(parent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(grandchild(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(grandparent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(sibling(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+(amca(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(hala(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+(dayi(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(teyze(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(amca(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(hala(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+
+(age(X, T), T<18 ; age(Y, U), U< 18) -> assertz(spouse(X,Y)), write('WARNING! This is a child marriage ');
+
+assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write(Y), write(' are now husband and wife').
 
 
 %% FUNCTIONS DECLARATION -END
