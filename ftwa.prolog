@@ -287,6 +287,10 @@ relation(X,Y):-
 	write(RELATION), write(' of '), write(Y).
 
 
+level(A, B):- child(A,C), level(C, D), B is D+1.
+level(_, 0).
+
+
 
 
 % age(+Birthday, -Age)
