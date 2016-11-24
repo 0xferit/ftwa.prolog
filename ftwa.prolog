@@ -365,7 +365,7 @@ later(Date1, Date2):- % Tests Date1 > Date2
 
 %% UTILITY FUNCTIONS DECLARATION -END (spouse(Y,X); spouse(X,Y)), 
 
-add_as_spouse(X,Y):- 
+
 
 %(child(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
 %(parent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
@@ -381,6 +381,10 @@ add_as_spouse(X,Y):-
 %(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
 %(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
 
+
+% GET MARRIED BEGIN%--------
+add_as_spouse(X,Y):- 
+
 (age(X, T), T<18 ; age(Y, U), U< 18) -> assertz(spouse(X,Y)), write('WARNING! This is a child marriage ');
 
 not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), not(sibling(X,Y)),
@@ -388,6 +392,24 @@ not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), 
 
 assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write(Y), write(' are now husband and wife') ; 
 write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!').
+%GET MARRIED END%------------
+
+
+%CREATE NEW PERSON BEGIN%-------
+add_person(Z):-
+not(uid(Z))  -> assert(uid(Z));
+	write("this uid is in usage").
+
+
+
+
+
+%CREATE NEW PERSON END%-------------
+
+
+
+
+
 
 %% FUNCTIONS DECLARATION -END
 
