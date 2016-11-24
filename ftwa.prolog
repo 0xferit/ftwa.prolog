@@ -177,14 +177,15 @@ yenge(X,Y) :-		sibling(Z, Y), male(Z), spouse_of(X,Z) ; amca(Z,Y), spouse_of(X,Z
 		
 
 
-kayinpeder(X,Y) :-	damat(Y,X).	
-kayinvalide(X,Y) :-	gelin(Y,X).
+kayinpeder(X,Y) :-	damat(Y,X), male(X) ; gelin(Y,X), male(X).	
+kayinvalide(X,Y) :-	damat(Y,X), female(X) ; gelin(Y,X), female(X).
 damat(X,Y) :- 		parent(Y, Z), 	female(Z), 	spouse_of(Z,X).
 gelin(X,Y) :- 		parent(Y, Z), 	male(Z), 	spouse_of(Z,X).
 
 bacanak(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), male(X), 	male(Y), 	female(Z), female(U), sibling(Z,U).
 baldiz(X,Y) :-		sibling(X,Z), 	spouse_of(Z,Y), male(Y), 	female(X), 	female(Z).
 elti(X,Y) :-		spouse_of(X,Z), spouse_of(Y,U), female(X), 	female(Y), 	male(Z), male(U), sibling(Z,U).
+gorumce(X,Y) :-		sibling(X,Z), female(X), female(Y), male(Z), spouse_of(Y,Z).
 kayinbirader(X,Y) :-	spouse_of(Z,Y), sibling(Z,X), 	male(X).
 
 
@@ -278,7 +279,8 @@ relation(X, Y, RELATION):- koca(X,Y), 		functor(koca(X,Y), RELATION, _);
 			babaanne(X,Y),		functor(babaanne(X,Y), RELATION, _);
 			torun(X,Y),		functor(torun(X,Y), RELATION, _);
 			yenge(X,Y), 		functor(yenge(X,Y), RELATION, _);
-			eniste(X,Y), 		functor(eniste(X,Y), RELATION, _).
+			eniste(X,Y), 		functor(eniste(X,Y), RELATION, _);
+			gorumce(X,Y),		functor(gorumce(X,Y), RELATION, _).
 
 
 relation(X,Y):-
@@ -315,6 +317,9 @@ dead(UID):- % controls date
 	get_date_now(date(Y1, M1, D1)),
 	deathdate(date(Y2, M2, D2), UID),
 	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
+
+%%level(0,1). CALCULATE LEVEL
+%%level(Uid,X) :- father(A,Uid), C is X+1 level(C,D), %%X is C
 	
 
 
