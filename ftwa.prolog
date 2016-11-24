@@ -367,24 +367,27 @@ later(Date1, Date2):- % Tests Date1 > Date2
 
 add_as_spouse(X,Y):- 
 
-(child(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-(parent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(grandchild(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(grandparent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(sibling(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-(amca(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(hala(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-(dayi(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(teyze(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(amca(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(hala(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+%(child(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+%(parent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(grandchild(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(grandparent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(sibling(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+%(amca(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(hala(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+%(dayi(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(teyze(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(amca(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(hala(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
+%(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
 
 (age(X, T), T<18 ; age(Y, U), U< 18) -> assertz(spouse(X,Y)), write('WARNING! This is a child marriage ');
 
-assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write(Y), write(' are now husband and wife').
+not(child(X,Y)), not(parent(X,Y)), not(grandchild(X,Y)), not(grandparent(X,Y)), not(sibling(X,Y)),
+		not(amca(X,Y)), not(hala(X,Y)), not(dayi(X,Y)), not(teyze(X,Y)), not(amca(Y,X)), not(hala(Y,X)), not(dayi(Y,X)), not(teyze(Y,X)) ->
 
+assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write(Y), write(' are now husband and wife') ; 
+write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!').
 
 %% FUNCTIONS DECLARATION -END
 
