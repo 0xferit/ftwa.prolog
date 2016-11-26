@@ -402,7 +402,7 @@ not(uid(Z))  -> assert(uid(Z));
 
 %%THIS FUNC IS NOT WORKING CORRECTLY
 add_name(X,Z):-
- not(name((X),(uid(Z))))  -> assert(name((X),(uid(Z)))); 
+ not(uid(Z))  -> assert(name(X, Z)), assert(uid(Z)); 
   write('already has a name').
 
 %%%
