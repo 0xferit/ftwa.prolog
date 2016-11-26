@@ -398,16 +398,30 @@ write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED
 %CREATE NEW PERSON BEGIN%-------
 add_person(Z):-
 not(uid(Z))  -> assert(uid(Z));
-	write("this uid is in usa").
+	write("this uid is in usage!").
 
-%%THIS FUNC IS NOT WORKING CORRECTLY
+%%ADDING NAME
 add_name(X,Z):-
- uid(Z), not(name(X, Z))  -> assert(name(X, Z)), assert(uid(Z)); 
-  write('already has a name').
+ uid(Z), not(name(X, Z))  -> assert(name(X, Z));
+  write('already has a name,  do you want to change it? go to update!').
 
-%%%
+%%ADDING SURNAME
+add_surname(X,Z):-
+ uid(Z), not(surname(X, Z))  -> assert(surname(X, Z));
+  write('already has a surname,  do you want to change it? go to update!').
 
+%%ADDING GENDER
+add_gender(X,Z):-
+ uid(Z), not(gender(X, Z))  -> assert(gender(X, Z));
+  write('already has a gender, do you want to change it? go to update!').
 
+%%ADDING BIRTHDATE
+add_birthdate(X,Z):-
+ uid(Z), not(birthdate(X, Z))  -> assert(birthdate(X, Z));
+  write('already has a birthdate, do you want to change it? go to update!').
+
+create_person(A,B,C,D):-
+assert(uid(A)), assert(name(B,A)), assert(surname(C,A)), assert(gender(D,A)).
 %CREATE NEW PERSON END%-------------
 
 
