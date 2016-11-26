@@ -379,7 +379,7 @@ later(Date1, Date2):- % Tests Date1 > Date2
 %(amca(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
 %(hala(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
 %(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
+%(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');dddddddddd
 
 
 % GET MARRIED BEGIN%--------
@@ -400,8 +400,12 @@ add_person(Z):-
 not(uid(Z))  -> assert(uid(Z));
 	write("this uid is in usage").
 
+%%THIS FUNC IS NOT WORKING CORRECTLY
+add_name(X,Z):-
+ not(name((X),(uid(Z))))  -> assert(name((X),(uid(Z)))); 
+  write('already has a name').
 
-
+%%%
 
 
 %CREATE NEW PERSON END%-------------
