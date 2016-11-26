@@ -402,8 +402,14 @@ not(uid(Z))  -> assert(uid(Z));
 
 %%THIS FUNC IS NOT WORKING CORRECTLY
 add_name(X,Z):-
- uid(Z), not(name(X, Z))  -> assert(name(X, Z)), assert(uid(Z)); 
+ uid(Z), not(name(_, Z))  -> assert(name(X, Z)), assert(uid(Z)); 
   write('already has a name').
+
+
+update_name(X,Z):- % Updates if exist, adds otherwise
+	name(_, Z) -> retract(name(_, Z)) ; write('asd').
+
+	uid(Z), not(name(_, Z)) -> assert(name(X, Z)), assert(uid(Z)); write('already has a name').
 
 %%%
 
