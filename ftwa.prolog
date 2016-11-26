@@ -402,15 +402,13 @@ not(uid(Z))  -> assert(uid(Z));
 
 %%ADDING NAME
 add_name(X,Z):-
-
  uid(Z), not(name(_, Z))  -> assert(name(X, Z)), assert(uid(Z)); 
   write('already has a name,  do you want to change it? go to update!').
 
 
-update_name(X,Z):- % Updates if exist, adds otherwise
-	name(_, Z) -> retract(name(_, Z)) ; write('asd').
-
-	uid(Z), not(name(_, Z)) -> assert(name(X, Z)), assert(uid(Z)); write('already has a name').
+update_name(X,Z):-
+	(name(_, Z) -> retract(name(_, Z)); write('asd')), % Retract, if exist
+	(uid(Z), not(name(_, Z)) -> assert(name(X, Z)), assert(uid(Z)); write('already has a name')). % Then add
 
 %%%
 
@@ -432,7 +430,7 @@ add_birthdate(X,Z):-
 
 create_person(A,B,C,D):-
 assert(uid(A)), assert(name(B,A)), assert(surname(C,A)), assert(gender(D,A)).
->>>>>>> 11ddf453b986c76e057ff1d31f39791b4f5ab73e
+
 %CREATE NEW PERSON END%-------------
 
 
