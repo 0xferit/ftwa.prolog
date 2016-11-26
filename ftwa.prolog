@@ -398,11 +398,11 @@ write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED
 %CREATE NEW PERSON BEGIN%-------
 add_person(Z):-
 not(uid(Z))  -> assert(uid(Z));
-	write("this uid is in usage").
+	write("this uid is in usa").
 
 %%THIS FUNC IS NOT WORKING CORRECTLY
 add_name(X,Z):-
- not(uid(Z))  -> assert(name(X, Z)), assert(uid(Z)); 
+ uid(Z), not(name(X, Z))  -> assert(name(X, Z)), assert(uid(Z)); 
   write('already has a name').
 
 %%%
