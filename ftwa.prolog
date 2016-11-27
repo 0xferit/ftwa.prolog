@@ -394,6 +394,9 @@ assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write
 write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!').
 %GET MARRIED END%------------
 
+add_as_child(X,Y):-
+	not(dead9(Y)), not(spouse_of(X,Y)), not(baba(Y,X)), not(anne(Y,X)) -> assert(child(X,Y)).
+
 
 %CREATE NEW PERSON BEGIN%-------
 add_person(Z):-
@@ -425,20 +428,15 @@ update_gender(X,Z):-
 
 %% UPDATING BIRTHDATE %% birthdate rules will be implemented later
 update_birthdate(X,Z):-
-	(birthdate(_, Z) -> retract(birthdate(_, Z)); write('birthdate updated successfully')), % Retract, if exist
+	(dead9(Z) -> (X)<(deathdate(_,Z))), birthdate(_, Z) -> retract(birthdate(_, Z)); write('birthdate updated successfully'), % Retract, if exist
 	(uid(Z), not(birthdate(_, Z)) -> assert(birthdate(X, Z)); % assert(uid(Z)); 
-	write('already has a name')). % Then add
+	write('already has')). % Then add
 
 %% UPDATING DEATHDATE %% DEATHDATE rules will be implemented later
 update_deathdate(X,Z):-
 	(deathdate(_, Z) -> retract(deathdate(_, Z)); write('deatthdate updated successfully')), % Retract, if exist
 	(uid(Z), not(deathdate(_, Z)) -> assert(deathdate(X, Z)); % assert(uid(Z)); 
-	write('already has a name')). % Then add
-
-%%ADDING BIRTHDATE
-add_birthdate(X,Z):-
- uid(Z), not(birthdate(X, Z))  -> assert(birthdate(X, Z));
-  write('already has a birthdate, do you want to change it? go to update!').
+	write('already has')). % Then add
 
 
 %%ADDING SURNAME
