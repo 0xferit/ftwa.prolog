@@ -217,7 +217,7 @@ grandparent(X,Y):- dede(X,Y); anneanne(X,Y); babaanne(X,Y).
 grandchild(X,Y):- torun(X,Y); grandparent(Y,X).
 
 
-
+%spouse spouse_of mantığını kullanabiliriz burada
 
 % deathdate(X,Y):- X = not(is_future(D)). % Trying to avoid setting deathdates to future, not successful
 
