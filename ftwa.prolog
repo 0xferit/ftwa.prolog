@@ -363,23 +363,8 @@ later(Date1, Date2):- % Tests Date1 > Date2
 	(Y1 > Y2; Y1==Y2, M1 > M2; Y1==Y2, M1==M2, D1 > D2).
 	
 
-%% UTILITY FUNCTIONS DECLARATION -END (spouse(Y,X); spouse(X,Y)), 
+%% UTILITY FUNCTIONS DECLARATION -END
 
-
-
-%(child(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-%(parent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(grandchild(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(grandparent(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(sibling(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-%(amca(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(hala(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');
-%(dayi(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(teyze(X,Y))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(amca(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(hala(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(dayi(Y,X))-> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!'); 
-%(teyze(Y,X)) -> write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!');dddddddddd
 
 
 % GET MARRIED BEGIN%--------
@@ -394,8 +379,11 @@ assertz(spouse(X,Y)), write('congratulations '), write(X), write(' and '), write
 write('DENIED! '), write(X), write(' AND'), write(Y), write(' CAN NOT BE MARRIED..!').
 %GET MARRIED END%------------
 
+
+%HAVING CHILD________
 add_as_child(X,Y):-
 	not(dead9(Y)), not(spouse_of(X,Y)), not(baba(Y,X)), not(anne(Y,X)) -> assert(child(X,Y)).
+%__________________
 
 
 %CREATE NEW PERSON BEGIN%-------
@@ -403,56 +391,44 @@ add_person(Z):-
 not(uid(Z))  -> assert(uid(Z));
 	write("this uid is in usage!").
 
-%%ADDING NAME
-add_name(X,Z):-
- uid(Z), not(name(_, Z))  -> assert(name(X, Z)); % assert(uid(Z)); 
-  write('already has a name,  do you want to change it? go to update!').
 
 %% UPDATING NAME
 update_name(X,Z):-
-	(name(_, Z) -> retract(name(_, Z)); write('name updated successfully')), % Retract, if exist
-	(uid(Z), not(name(_, Z)) -> assert(name(X, Z)); % assert(uid(Z)); 
-	write('already has a name')). % Then add
+	(name(_, Z) -> retract(name(_, Z)), write('name updated successfully!')); % Retract, if exist
+	(uid(Z), not(name(_, Z)) -> assert(name(X, Z)), 
+	write('name updated successfully!')). % Then add
 
 %% UPDATING SURNAME
 update_surname(X,Z):-
 	(surname(_, Z) -> retract(surname(_, Z)); write('surname updated successfully')), % Retract, if exist
-	(uid(Z), not(surname(_, Z)) -> assert(surname(X, Z)); % assert(uid(Z)); 
-	write('already has a name')). % Then add
+	(uid(Z), not(surname(_, Z)) -> assert(surname(X, Z));
+	write('surname updated successfully')). % Then add
+
 
 %% UPDATING GENDER
 update_gender(X,Z):-
 	(gender(_, Z) -> retract(gender(_, Z)); write('gender updated succesfully')), % Retract, if exist
-	(uid(Z), not(gender(_, Z)) -> assert(gender(X, Z)); % assert(uid(Z)); 
-	write('already has a name')). % Then add
+	(uid(Z), not(gender(_, Z)) -> assert(gender(X, Z));
+	write('gender updated successfully!')). % Then add
+
+
 
 %% UPDATING BIRTHDATE %% birthdate rules will be implemented later
 update_birthdate(X,Z):-
 	(dead9(Z) -> (X)<(deathdate(_,Z))), birthdate(_, Z) -> retract(birthdate(_, Z)); write('birthdate updated successfully'), % Retract, if exist
-	(uid(Z), not(birthdate(_, Z)) -> assert(birthdate(X, Z)); % assert(uid(Z)); 
-	write('already has')). % Then add
+	(uid(Z), not(birthdate(_, Z)) -> assert(birthdate(X, Z))).
+
+
 
 %% UPDATING DEATHDATE %% DEATHDATE rules will be implemented later
 update_deathdate(X,Z):-
-	(deathdate(_, Z) -> retract(deathdate(_, Z)); write('deatthdate updated successfully')), % Retract, if exist
-	(uid(Z), not(deathdate(_, Z)) -> assert(deathdate(X, Z)); % assert(uid(Z)); 
-	write('already has')). % Then add
+	(deathdate(_, Z) -> retract(deathdate(_, Z)); write('deathdate updated successfully')), % Retract, if exist
+	(uid(Z), not(deathdate(_, Z)) -> assert(deathdate(X, Z))).
 
 
-%%ADDING SURNAME
-add_surname(X,Z):-
- uid(Z), not(surname(_, Z))  -> assert(surname(X, Z));
-  write('already has a surname,  do you want to change it? go to update!').
 
-%%ADDING GENDER
-add_gender(_,Z):-
- uid(Z), not(gender(X, Z))  -> assert(gender(X, Z));
-  write('already has a gender, do you want to change it? go to update!').
-
-
-create_person(A,B,C,D):-
-assert(uid(A)), assert(name(B,A)), assert(surname(C,A)), assert(gender(D,A)).
-
+bring_to_life(Z):-
+	(deathdate(_, Z) -> retract(deathdate(_, Z))). 
 %CREATE NEW PERSON END%-------------
 
 
